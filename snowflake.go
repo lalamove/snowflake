@@ -108,14 +108,14 @@ func (n *Node) Generate() ID {
 
 	n.mu.Lock()
 
-	now := time.Now().Sub(Epoch)
+	now := time.Since(Epoch)
 
 	if now-n.time < time.Millisecond {
 		n.step = (n.step + 1) & stepMask
 
 		if n.step == 0 {
 			for now-n.time < time.Millisecond {
-				now = time.Now().Sub(Epoch)
+				now = time.Since(Epoch)
 			}
 		}
 	} else {
